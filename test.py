@@ -5,13 +5,12 @@ import json
 with open("twitterCredentials.json", "r") as read_file:
 	credentials = json.load(read_file)
 	read_file.close()
-	print(credentials)
 	
 
-consumer_key = 'consumer key'
-consumer_secret = 'consumer secrets'
-access_token = 'access token'
-access_token_secret = 'access token secret'
+consumer_key = credentials['consumer_key']
+consumer_secret = credentials['consumer_secret']
+access_token = credentials['access_token']
+access_token_secret = credentials['access_token_secret']
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
@@ -31,3 +30,5 @@ def mainFunction():
 			print(e.reason)
 		except StopIteration:
 			break
+			
+
