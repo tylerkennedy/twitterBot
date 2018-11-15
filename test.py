@@ -19,12 +19,26 @@ def login_api():
 	return tweepy.API(auth)
 
 # Sends a tweet
-def main():
+def sendTweet(message):
 	api = login_api()
-	tweet = "My first tweet"
+	tweet = message
 	status = api.update_status(status=tweet)
-	
+
+# Likes all tweets on the timeline	
+def likeTweet():
+	api = login_api()
+	for tweet in tweepy.Cursor(api.search, q='#ocean').items():
+		try:
+			print('Tweet from: @' + tweet.user.screen_name)
+			
+			tweet.favorite()
+			print('Retweeted the tweet')
+		except tweepy.TweepError as e:
+			print(e.reason)
+			
+		except StopIteration:
+			break
 	
 if __name__ == "__main__":
-	main()
+	likeTweet()
 			
