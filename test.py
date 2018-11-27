@@ -38,7 +38,27 @@ def likeTweet():
 			
 		except StopIteration:
 			break
+			
+			
+"""Structure for tic-tac-toe bot"""
+def detect_tag():
+	# Run this on loop to listen for when the bot is tagged in a new thread
+	# Determine if this is a new thread or not
 	
+def build_board():
+	"""
+	1 | 2 | 3
+	- + - + -
+	4 | 5 | 6
+	- + - + -
+	7 | 8 | 9
+	
+	"""
+	
+	board = {1 : "none", 2 : "none", 3 : "none", 4 : "none", 5 : "none", 6 : "none", 7 : "none", 8 : "none", 9 : "none"}
+
+def main():
+	# Call all functions necessary for the bot
 if __name__ == "__main__":
-	likeTweet()
+	main()
 			
