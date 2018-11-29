@@ -46,12 +46,20 @@ class game:
 
 	# Constructor for the game
 	def __init__(self):
+		self.build_board()
+		self.tweet_user("Thanks for starting a game of tic-tac-toe. Do you want to be X's or O's?")
 		
-	def detect_tag():
+		
+		
+		
+		
+		
+	def detect_reply():
 		# Run this on loop to listen for when the bot is tagged in a new thread
 		# Determine if this is a new thread or not
 
-	def get_user_tag()
+	def get_user_tag():
+		# Get the tag of the user so we can continue the thread for the game
 	def tweet_user(message):
 		api = login_api()
 		tweet = message
@@ -70,14 +78,6 @@ class game:
 		global board
 		board = {1 : "none", 2 : "none", 3 : "none", 4 : "none", 5 : "none", 6 : "none", 7 : "none", 8 : "none", 9 : "none"}
 	
-	def start_game():
-	
-	
-		# This should be what the user says to the bot to communicate with it
-		if(response.upper() == "START"):
-			build_board()
-			#
-			tweet_user
 	def main():
 		# Call all functions necessary for the bot
 if __name__ == "__main__":
