@@ -39,6 +39,11 @@ def likeTweet():
 		except StopIteration:
 			break
 			
+
+# Gather all tweets where the bot is mentioned
+mentions = login_api().search(q="@b0t_b0y")
+
+print(mentions)
 			
 """Structure for tic-tac-toe bot"""
 
@@ -60,6 +65,7 @@ class game:
 	def detect_reply():
 		# Run this on loop to listen for when the bot is tagged in a new thread
 		# Determine if this is a new thread or not
+		None
 
 	def get_screen_name():
 		# Get the tag of the user so we can continue the thread for the game
@@ -78,8 +84,8 @@ class game:
 		4 | 5 | 6
 		- + - + -
 		7 | 8 | 9
-	
 		"""
+		
 		global board
 		board = {1 : "none", 2 : "none", 3 : "none", 4 : "none", 5 : "none", 6 : "none", 7 : "none", 8 : "none", 9 : "none"}
 	
@@ -93,6 +99,12 @@ class game:
 		return board_output
 	def main():
 		# Call all functions necessary for the bot
+		None
+		
+		
+		
+		
+		
 if __name__ == "__main__":
 	main()
 			
