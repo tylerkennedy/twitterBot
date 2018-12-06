@@ -41,12 +41,23 @@ def likeTweet():
 			
 
 # Gather all tweets where the bot is mentioned
-mentions = login_api().search(q="@b0t_b0y")
 
-print(mentions)
+metions = []
+def gather_mentions():
+	global mentions
+	mentions = login_api().search(q="@b0t_b0y")
+	
+	print(mentions)
+	return mentions
+	
 			
-"""Structure for tic-tac-toe bot"""
+#gather_mentions()
 
+for mention in gather_mentions():
+	None
+
+"""Structure for tic-tac-toe bot"""
+#"""
 class game:
 
 	# Constructor for the game
@@ -75,36 +86,40 @@ class game:
 		api = login_api()
 		tweet = message
 		status = api.update_status(status=tweet)
+	
+	
 
 	board = {}
+	
 	def build_board():
-		"""
-		1 | 2 | 3
-		- + - + -
-		4 | 5 | 6
-		- + - + -
-		7 | 8 | 9
-		"""
+		#	
+		#	1 | 2 | 3
+		#	- + - + -
+		#	4 | 5 | 6
+		#	- + - + -
+		#	7 | 8 | 9
+		#	
 		
 		global board
-		board = {1 : "none", 2 : "none", 3 : "none", 4 : "none", 5 : "none", 6 : "none", 7 : "none", 8 : "none", 9 : "none"}
+		board = {1 : "1", 2 : "2", 3 : "3", 4 : "4", 5 : "5", 6 : "6", 7 : "7", 8 : "8", 9 : "9"}
 	
 	def current_board():
-		board_output = board["1"] + "|" + board["2"] + "|" + board["3"] + "\n" +
-		"- + - + - \n" +
-		board["4"] + "|" + board["5"] + "|" + board["6"] + "\n" +
-		"- + - + - \n" +
-		board["7"] + "|" + board["8"] + "|" + board["9"] + "\n"
+		print(board)
+		board_output = board[1] + " |  " + board[2] + "  | " + board[3] + "\n" + "- + - + - \n" + board[4] + " |  " + board[5] + "  | " + board[6] + "\n" + "- + - + - \n" + board[7] + " |  " + board[8] + "  | " + board[9] + "\n"
 		
 		return board_output
-	def main():
-		# Call all functions necessary for the bot
-		None
+	build_board()
+	print(current_board())
+	tweet_user(current_board())
+def main():
+	# Call all functions necessary for the bot
+	None
 		
-		
+
 		
 		
 		
 if __name__ == "__main__":
 	main()
 			
+#"""	
