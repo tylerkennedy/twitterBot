@@ -19,10 +19,10 @@ def login_api():
 	return tweepy.API(auth)
 
 # Sends a tweet
-def sendTweet(message):
+def sendTweet(message, id):
 	api = login_api()
 	tweet = message
-	status = api.update_status(status=tweet)
+	status = api.update_status(status=tweet, in_reply_to_status= id)
 
 # Likes all tweets on the timeline	
 def likeTweet():
@@ -43,6 +43,8 @@ def likeTweet():
 # Gather all tweets where the bot is mentioned
 
 metions = []
+
+
 def gather_mentions():
 	global mentions
 	mentions = login_api().search(q="@b0t_b0y")
@@ -52,18 +54,23 @@ def gather_mentions():
 	
 			
 #gather_mentions()
-
+games = {}
+# {screen_name: "EX: @b0t_b0y", last_tweetid: "EX: 123456789", game_active:"EX: yes"}
 for mention in gather_mentions():
-	None
+	print(mention.id)
+	sendTweet("@b0t_b0y this is a reply sent from the bot", mention.id)
+
+
 
 """Structure for tic-tac-toe bot"""
-#"""
+
 class game:
 
 	# Constructor for the game
 	def __init__(self):
 		self.screen_name = ""
-		self.thread_id = 0
+		self.last_tweetid = 0
+		self.game_active = True
 		self.get_screen_name()
 		self.build_board()
 		self.tweet_user("Thanks for starting a game of tic-tac-toe. Do you want to be X's or O's?")
@@ -71,7 +78,7 @@ class game:
 		
 		
 		
-		
+"""		
 		
 	def detect_reply():
 		# Run this on loop to listen for when the bot is tagged in a new thread
