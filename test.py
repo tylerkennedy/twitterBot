@@ -22,7 +22,7 @@ def login_api():
 def sendTweet(message, id):
 	api = login_api()
 	tweet = message
-	status = api.update_status(status=tweet, in_reply_to_status= id)
+	status = api.update_status(tweet, id)
 
 # Likes all tweets on the timeline	
 def likeTweet():
@@ -51,14 +51,14 @@ def gather_mentions():
 	
 	print(mentions)
 	return mentions
-	
-			
+
+
 #gather_mentions()
 games = {}
 # {screen_name: "EX: @b0t_b0y", last_tweetid: "EX: 123456789", game_active:"EX: yes"}
 for mention in gather_mentions():
-	print(mention.id)
-	sendTweet("@b0t_b0y this is a reply sent from the bot", mention.id)
+	print(mention.entities['user_mentions'][0]['screen_name'])
+	#sendTweet("@b0t_b0y this is a reply sent from the bot", mention.id)
 
 
 
@@ -89,10 +89,10 @@ class game:
 		# Get the tag of the user so we can continue the thread for the game
 		self.screen_name = ""
 		self.thread_id = 0
-	def tweet_user(message):
+	def tweet_user(screen_name, message, id):
 		api = login_api()
-		tweet = message
-		status = api.update_status(status=tweet)
+		tweet = screen_name + message
+		status = api.update_status(tweet, id)
 	
 	
 
