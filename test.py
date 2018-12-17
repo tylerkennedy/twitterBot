@@ -54,10 +54,19 @@ def gather_mentions():
 
 
 #gather_mentions()
-games = {}
+games = [1074666109373243392, 1074666873227235330]
 # {screen_name: "EX: @b0t_b0y", last_tweetid: "EX: 123456789", game_active:"EX: yes"}
 for mention in gather_mentions():
-	print(mention.entities['user_mentions'][0]['screen_name'])
+	screen_name = mention.entities['user_mentions'][0]['screen_name']
+	print(screen_name)
+	print(mention.id)
+	if(mention.id not in games):
+		games.append(mention.id)
+		sendTweet("@" + str(screen_name) + " starting a new game with your first reply", mention.id)
+		print("Tweet sent")
+	else:
+		#sendTweet("@" + str(screen_name) + " starting a new game with your first reply", mention.id)
+		print("No Tweet sent ")
 	#sendTweet("@b0t_b0y this is a reply sent from the bot", mention.id)
 
 
