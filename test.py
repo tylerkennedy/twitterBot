@@ -8,19 +8,19 @@ def getCredentials(fileLocation):
 		read_file.close()
 	return credentials
 	
-def login_api():
-	consumer_key = getCredentials("twitterCredentials.json")['consumer_key']
-	consumer_secret = getCredentials("twitterCredentials.json")['consumer_secret']
-	access_token = getCredentials("twitterCredentials.json")['access_token']
-	access_token_secret = getCredentials("twitterCredentials.json")['access_token_secret']
 
-	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-	auth.set_access_token(access_token, access_token_secret)
-	return tweepy.API(auth)
+consumer_key = getCredentials("twitterCredentials.json")['consumer_key']
+consumer_secret = getCredentials("twitterCredentials.json")['consumer_secret']
+access_token = getCredentials("twitterCredentials.json")['access_token']
+access_token_secret = getCredentials("twitterCredentials.json")['access_token_secret']
+
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+#return tweepy.API(auth)
 
 # Sends a tweet
 def sendTweet(message, id):
-	api = login_api()
+	api = tweepy.API(auth)
 	tweet = message
 	status = api.update_status(tweet, id)
 
@@ -39,6 +39,42 @@ def likeTweet():
 		except StopIteration:
 			break
 			
+"""
+from tweepy import Stream
+from tweepy import OAuthHandler
+from tweepy.streaming import StreamListener
+
+
+#consumer key, consumer secret, access token, access secret.
+ckey = getCredentials("twitterCredentials.json")['consumer_key']
+csecret = getCredentials("twitterCredentials.json")['consumer_secret']
+atoken = getCredentials("twitterCredentials.json")['access_token']
+asecret = getCredentials("twitterCredentials.json")['access_token_secret']
+
+class listener(StreamListener):
+    
+
+    def on_data(self, data):
+        print(data)
+        return(True)
+
+    def on_status(self, status):
+        print("PLEASE WORK")
+        print(status.text)
+        sendTweet("@" + (status.entities['user_mentions'][0]['screen_name']) + "Lets play tic-tac-toe!", status.id)
+
+
+    
+
+    def on_error(self, status):
+        print(status)
+
+auth = OAuthHandler(ckey, csecret)
+auth.set_access_token(atoken, asecret)
+
+twitterStream = Stream(auth, listener())
+twitterStream.filter(track=["@b0t_b0y"])
+"""
 
 # Gather all tweets where the bot is mentioned
 
@@ -47,32 +83,34 @@ metions = []
 
 def gather_mentions():
 	global mentions
-	mentions = login_api().search(q="@b0t_b0y")
+	mentions = tweepy.API(auth).search(q="@t3_gamebot")
 	
 	print(mentions)
 	return mentions
 
 
 #gather_mentions()
-games = [1074666109373243392, 1074666873227235330]
+games = []
 # {screen_name: "EX: @b0t_b0y", last_tweetid: "EX: 123456789", game_active:"EX: yes"}
 for mention in gather_mentions():
-	screen_name = mention.entities['user_mentions'][0]['screen_name']
+	screen_name = mention.user.screen_name
 	print(screen_name)
 	print(mention.id)
+	sendTweet("@" + str(screen_name) + " Let's play a game of tic tac toe!", mention.id)
+	"""
 	if(mention.id not in games):
 		games.append(mention.id)
-		sendTweet("@" + str(screen_name) + " starting a new game with your first reply", mention.id)
+		sendTweet("@" + str(screen_name) + " Let's play tic-tac-toe!", mention.id)
 		print("Tweet sent")
 	else:
 		#sendTweet("@" + str(screen_name) + " starting a new game with your first reply", mention.id)
 		print("No Tweet sent ")
 	#sendTweet("@b0t_b0y this is a reply sent from the bot", mention.id)
+	"""
 
 
-
-"""Structure for tic-tac-toe bot"""
-
+#Structure for tic-tac-toe bot
+"""
 class game:
 
 	# Constructor for the game
@@ -87,7 +125,7 @@ class game:
 		
 		
 		
-"""		
+		
 		
 	def detect_reply():
 		# Run this on loop to listen for when the bot is tagged in a new thread
